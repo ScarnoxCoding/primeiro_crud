@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="{{ url_for('adicionar') }}" class="btn btn-add">Adicionar Novo Contato</a>
+<hr>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in dados %}
+        <tr>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.email }}</td>
+            <td class="actions">
+                <a href="{{ url_for('editar', id=item.id) }}" class="btn btn-edit">Editar</a>
+                <a href="{{ url_for('apagar', id=item.id) }}" class="btn btn-delete"
+                    onclick="return confirm('Tem certeza que deseja apagar este contato?');">Apagar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">Nenhum contato cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
